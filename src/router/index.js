@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import auth from '../services/auth'
 import Hello from '@/components/Hello'
 import Login from '@/components/Login'
+import NotFound from '@/components/NotFound'
 
 
 Vue.use(Router)
@@ -52,11 +53,11 @@ const routes = [
   //   // props: Notifications.get(),
   //   meta: { auth: true }
   // },
-  // {
-  //   path: '*',
-  //   component: NotFound,
-  //   meta: { auth: false }
-  // }
+  {
+    path: '*',
+    component: NotFound,
+    meta: { auth: false }
+  }
 ]
 
 const router = new Router({
