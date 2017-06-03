@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import auth from '../services/auth'
-import Hello from '@/components/Hello'
+import Todos from '@/components/Todos'
+import Tokens from '@/components/Tokens'
+import Profile from '@/components/Profile'
 import Login from '@/components/Login'
 import NotFound from '@/components/NotFound'
 
@@ -16,24 +18,24 @@ const routes = [
   },
   {
     path: '/',
-    component: Hello,
+    component: Todos,
     meta: { auth: true }
   },
-  // {
-  //   path: '/todos',
-  //   component: Todos,
-  //   meta: { auth: true }
-  // },
-  // {
-  //   path: '/tokens',
-  //   component: Tokens,
-  //   meta: { auth: false }
-  // },
-  // {
-  //   path: '/profile',
-  //   component: Profile,
-  //   meta: { auth: true }
-  // },
+  {
+    path: '/todos',
+    component: Todos,
+    meta: { auth: true }
+  },
+  {
+    path: '/tokens',
+    component: Tokens,
+    meta: { auth: false }
+  },
+  {
+    path: '/profile',
+    component: Profile,
+    meta: { auth: true }
+  },
   // {
   //   path: '/device_info',
   //   component: DeviceInfo,
