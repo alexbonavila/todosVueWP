@@ -4,7 +4,7 @@
     <md-list>
       <p v-show="delayTry">Delay Interval: {{ delayTime }}ms.</p>
     </md-list>
-    <md-button @click.native="vibrate" class="md-raised md-warn">Vibrate</md-button>
+    <md-button @click.native="vibrate" class="md-raised md-primary">Vibrate</md-button>
   </div>
 </template>
 <style>
@@ -26,10 +26,10 @@
     },
     methods: {
       onDeviceReady () {
-        console.log('XIVATO device Ready!')
+          console.log("ready");
       },
       onBeforeDestroy () {
-        console.log('XIVATO device onBeforeDestroy!')
+        console.log('on Before Destroy')
       },
       vibrate () {
         if (window.cordova && window.device.platform !== 'browser') {

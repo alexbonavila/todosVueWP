@@ -1,5 +1,6 @@
 <template>
     <div  id="todos">
+      <vue-pull-refresh :on-refresh="onRefresh" :config="config">
         <md-table-card>
             <md-toolbar>
                 <h1 class="md-title">Todos</h1>
@@ -47,21 +48,31 @@
         <md-snackbar md-position="bottom center" ref="connectionError" md-duration="4000">
             <span>Connection error. Please reconnect using connect button!.</span>
         </md-snackbar>
-
+</vue-pull-refresh>
     </div>
 </template>
 <style>
 </style>
 <script>
   import todosVue from '../todosVue'
+  import VuePullRefresh from 'vue-pull-refresh'
   export default{
+    components: {
+      'vue-pull-refresh': VuePullRefresh
+    },
     data () {
       return {
         todos: [],
         connecting: true,
         total: 0,
         perPage: 0,
-        page: 0
+        page: 0,
+        config: {
+          errorLabel: 'Error',
+          startLabel: 'Swipe',
+          readyLabel: 'Release',
+          loadingLabel: 'Refreshing...'
+        }
       }
     },
     created () {
@@ -92,6 +103,18 @@
       },
       onPagination: function () {
         console.log('pagination todo!')
+      },
+      onRefresh: function () {
+        this.connecting = true
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            resolve()
+          }, 1000)
+        }).then(() => {
+          this.fetchData()
+        }).catch(() => {
+          this.showConnectionError()
+        })
       }
     }
   }

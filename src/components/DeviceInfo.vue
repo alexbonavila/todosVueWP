@@ -62,16 +62,8 @@
     },
     methods: {
       onDeviceReady () {
-        console.log('onDeviceReady')
+        console.log('Device Ready')
         console.log(window.device)
-        console.log('Cordova: ' + window.device.cordova)
-        console.log('Model: ' + window.device.model)
-        console.log('Platform: ' + window.device.platform)
-        console.log('Uuid: ' + window.device.uuid)
-        console.log('Version: ' + window.device.version)
-        console.log('Manufacturer: ' + window.device.manufacturer)
-        console.log('IsVirtual: ' + window.device.isVirtual)
-        console.log('Serial: ' + window.device.serial)
         this.cordova = window.device.cordova
         this.model = window.device.model
         this.platform = window.device.platform
@@ -82,7 +74,7 @@
         this.serial = window.device.serial
       },
       onBeforeDestroy () {
-        console.log('Device onBeforeDestroy!')
+        console.log('Device  Before Destroy')
       }
     }
   }
