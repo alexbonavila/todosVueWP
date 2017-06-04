@@ -23,7 +23,7 @@ export default {
   },
   enable () {
     this.init()
-    this.register()
+    //this.register()
     // this.subscribe('all')
     this.process()
   },
@@ -45,17 +45,15 @@ export default {
       console.log('registration event: ' + data.registrationId)
       let form = new Form({'registration_id': data.registrationId})
 
-      console.log('registration_id '+data.registrationId)
-
-      // form.post(todosVue.REGISTER_GCM_TOKEN_URL)
-      //   .then(response => {
-      //     localStorage.setItem('registrationId', data.registrationId)
-      //     console.log('GCM token registered OK!')
-      //   })
-      //   .catch(error => {
-      //     console.log('And error ocurred adding GCM token to backend!')
-      //     console.log(error)
-      //   })
+      form.post(todosVue.REGISTER_GCM_TOKEN_URL)
+        .then(response => {
+          localStorage.setItem('registrationId', data.registrationId)
+          console.log('GCM token registered OK!')
+        })
+        .catch(error => {
+          console.log('And error ocurred adding GCM token to backend!')
+          console.log(error)
+        })
     })
   },
   subscribe (topic) {

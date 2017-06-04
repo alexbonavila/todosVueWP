@@ -32,6 +32,14 @@ if (auth.loggedIn()) {
   }
 }
 
+Vue.material.registerTheme('custom', {
+  primary: 'orange',
+  accent: 'orange',
+  warn: 'red',
+  background: 'white'
+})
+
+Vue.material.setCurrentTheme('custom')
 
 /* eslint-disable no-new */
 new Vue({

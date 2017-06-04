@@ -30,7 +30,7 @@
     created () {
       var that = this
       setTimeout(function () {
-//        that.fetchPage()
+        //that.fetchPage()
         that.connecting = false
       }, 500)
       document.addEventListener('deviceready', this.onDeviceReady, false)

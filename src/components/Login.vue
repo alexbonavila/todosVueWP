@@ -20,6 +20,7 @@
 
       <md-button type="button" class="md-raised md-primary" v-on:click.native="login" v-show="!authorized">Login</md-button>
       <md-button type="button" class="md-raised md-primary" v-on:click.native="initLogout" v-show="authorized">Logout</md-button>
+     <md-button v-show="!authorized"><a href="http://todosbackend.tk/register" target="_blank" class="button">Register</a></md-button>
     </md-card-content>
 
     <md-dialog-confirm
