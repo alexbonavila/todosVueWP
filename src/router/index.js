@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import auth from '../services/auth'
+import DeviceInfo from '@/components/DeviceInfo'
+import Cordova from '@/components/Cordova'
 import Todos from '@/components/Todos'
 import Tokens from '@/components/Tokens'
 import Profile from '@/components/Profile'
@@ -36,15 +38,15 @@ const routes = [
     component: Profile,
     meta: { auth: true }
   },
-  // {
-  //   path: '/device_info',
-  //   component: DeviceInfo,
-  //   meta: { auth: false }
-  // },
-  // { path: '/cordova',
-  //   component: Cordova,
-  //   meta: { auth: false }
-  // },
+  {
+    path: '/device_info',
+    component: DeviceInfo,
+    meta: { auth: false }
+  },
+  { path: '/cordova',
+    component: Cordova,
+    meta: { auth: false }
+  },
   {
     path: '/login',
     component: Login,
@@ -75,18 +77,3 @@ router.beforeEach((to, from, next) => {
 })
 
 export default router
-
-// export default new Router({
-//   routes: [
-//     {
-//       path: '/',
-//       name: 'Hello',
-//       component: Hello
-//     },
-//     {
-//       path: '/login',
-//       name: 'Login',
-//       component: Login
-//     }
-//   ]
-// })
