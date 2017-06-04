@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import auth from '../services/auth'
 import DeviceInfo from '@/components/DeviceInfo'
 import Cordova from '@/components/Cordova'
+import Notifications from '@/components/Notifications'
 import Todos from '@/components/Todos'
 import Tokens from '@/components/Tokens'
 import Profile from '@/components/Profile'
@@ -52,11 +53,11 @@ const routes = [
     component: Login,
     meta: { auth: false }
   },
-  // { path: '/notifications',
-  //   component: Notifications,
-  //   // props: Notifications.get(),
-  //   meta: { auth: true }
-  // },
+  { path: '/notifications',
+    component: Notifications,
+    // props: Notifications.get(),
+    meta: { auth: true }
+  },
   {
     path: '*',
     component: NotFound,

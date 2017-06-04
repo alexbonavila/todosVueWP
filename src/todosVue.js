@@ -5,10 +5,9 @@ const todosVue = {
   OAUTH_CLIENT_SECRET: 'Ixcve13DZPIE6Oo1nFBA3spzKgyCmTsspoFVUXpw',
   OAUTH_SERVER_URL: 'http://todosbackend.tk/oauth/token',
   API_TASK_URL: 'http://todosbackend.tk/api/v1/task',
-  API_PROFILE_URL: 'http://todosbackend.tk/api/v1/user'
-
-  // ANDROID_SENDER_ID: '',
-  // REGISTER_GCM_TOKEN_URL: '',
-  // GET_MESSAGES_URL: ''
+  API_PROFILE_URL: 'http://todosbackend.tk/api/v1/user',
+  ANDROID_SENDER_ID: '769012988855',
+  REGISTER_GCM_TOKEN_URL: 'http://todosbackend.tk/api/v1/user/gcmtoken',
+  GET_MESSAGES_URL: 'http://todosbackend.tk/api/v1/user/messages'
 }
 export default todosVue

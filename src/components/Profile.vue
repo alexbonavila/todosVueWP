@@ -1,9 +1,9 @@
 <template>
     <md-card md-with-hover>
         <md-card-header>
-            <md-avatar>
-                <img :src="avatar" alt="Avatar">
-            </md-avatar>
+          <md-avatar @click.native="loadCamera">
+            <img id="profilePicture" :src="avatar" alt="name">
+          </md-avatar>
 
             <div class="md-title">{{ id }} {{ name }}</div>
             <div class="md-subhead">{{ email}}</div>
@@ -21,7 +21,10 @@
                     <label>Email</label>
                     <md-input v-model="email" placeholder="Put your email here"></md-input>
                 </md-input-container>
-
+                <md-input-container>
+                    <label>Coordinates</label>
+                    <md-input v-model="cords" placeholder="Coordinates"></md-input>
+                </md-input-container>
                 <md-input-container>
                     <label>Created at</label>
                     <md-input v-model="createdAt" placeholder="Date here"></md-input>
@@ -35,11 +38,11 @@
         </md-card-content>
 
         <md-card-actions>
-            <md-button>Edit</md-button>
-            <md-button>Delete</md-button>
+          <md-button @click.native="loadLocation">Get Location</md-button>
+          <md-button @click.native="loadContact">Save</md-button>
         </md-card-actions>
         <md-snackbar md-position="bottom center" ref="connectionError" md-duration="4000">
-            <span>Connection error. Please reconnect using connect button!.</span>
+            <span>Connection error.</span>
         </md-snackbar>
     </md-card>
 </template>
@@ -52,6 +55,7 @@
     data () {
       return {
         avatar: 'http://www.gravatar.com/avatar/ef7becbb69d8ea5108fb1d98567ddb68',
+        cords: "",
         id: null,
         name: null,
         email: null,
@@ -87,7 +91,77 @@
       },
       showConnectionError () {
         this.$refs.connectionError.open()
-      }
+      },
+      loadCamera () {
+        if (window.cordova && window.device.platform !== 'browser') {
+          this.openCamera()
+        } else {
+          console.log('Camera not supported')
+        }
+      },
+      openCamera () {
+        navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+          destinationType: window.Camera.DestinationType.FILE_URI })
+
+        function onSuccess (imageURI) {
+          window.localStorage.setItem('profilePicture', null)
+          console.log('Picture Taken')
+          var image = document.getElementById('profilePicture')
+          image.src = imageURI
+          window.localStorage.setItem('profilePicture', imageURI)
+          console.log(image)
+        }
+
+        function onFail (message) {
+          window.alert('Error: ' + message)
+        }
+      },
+      loadLocation () {
+        if (window.cordova && window.device.platform !== 'browser') {
+          this.getLocation()
+        } else {
+          console.log('GPS no supported')
+        }
+      },
+      getLocation () {
+        var out = this
+        console.log('Get location')
+        this.connecting = true
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            out.connecting = false
+            console.log('Coordinates: ' + position.coords.latitude + ', ' + position.coords.longitude)
+            window.localStorage.setItem('coords', position.coords.latitude+ ', ' + position.coords.longitude)
+            out.cords=position.coords.latitude+ ', ' + position.coords.longitude
+            window.alert('Location Save')
+          },
+          function (err) {
+            out.connecting = false
+            window.alert('Error :' + err)
+          },
+          { timeout: 10000 })
+      },
+      loadContact () {
+        if (window.cordova && window.device.platform !== 'browser') {
+          this.saveContact()
+        } else {
+          console.log('Contact no supported')
+        }
+      },
+      saveContact () {
+        function onSuccess (contact) {
+          window.alert('Contact Save')
+        }
+
+        function onError (contactError) {
+          window.alert('Error =  ' + contactError.code)
+        }
+        var contact = navigator.contacts.create()
+        contact.displayName = contact.nickname = contact.name = this.name
+        contact.phoneNumbers = new window.ContactField('mobile', this.phone, true)
+        console.log(contact)
+        contact.save(onSuccess, onError)
+      },
     }
   }
 </script>
